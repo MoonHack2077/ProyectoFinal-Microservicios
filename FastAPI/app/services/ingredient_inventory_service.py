@@ -1,5 +1,5 @@
 """This module contains the service functions for the ingredientInventory class."""
-from app.models.ingredientInventory_model import IngredientInventory
+from app.models.ingredient_inventory_model import IngredientInventory
 
 def create_ingredient_inventory_service(ingredient_inventory):
     """
@@ -61,13 +61,15 @@ def get_all_ingredient_inventories_service():
         for ingredient_inventory in ingredient_inventories
     ]
     
-def update_ingredient_inventory_service(ingredient_inventory_id: int, ingredient_inventory_data: IngredientInventory):
+def update_ingredient_inventory_service(ingredient_inventory_id: int, 
+                                        ingredient_inventory_data: IngredientInventory):
     """
     Updates an existing ingredientInventory's details by its ID.
 
     Args:
         ingredient_inventory_id (int): The ID of the ingredientInventory to update.
-        ingredient_inventory_data (IngredientInventory): An object containing the updated ingredientInventory details.
+        ingredient_inventory_data (IngredientInventory): An object containing the 
+        updated ingredientInventory details.
         
     Returns:
         IngredientInventoryModel: The updated ingredientInventory record.
@@ -76,9 +78,9 @@ def update_ingredient_inventory_service(ingredient_inventory_id: int, ingredient
         DoesNotExist: If the ingredientInventory with the given ID does not exist.
     """
     ingredient_inventory = IngredientInventory.get_by_id(ingredient_inventory_id)
-    ingredient_inventory.name = ingredient_inventory_data.name,
-    ingredient_inventory.amount = ingredient_inventory_data.amount,
-    ingredient_inventory.unit = ingredient_inventory_data.unit,
+    ingredient_inventory.name = ingredient_inventory_data.name
+    ingredient_inventory.amount = ingredient_inventory_data.amount
+    ingredient_inventory.unit = ingredient_inventory_data.unit
     ingredient_inventory.dateExpiration = ingredient_inventory_data.dateExpiration
     ingredient_inventory.save()
     return ingredient_inventory

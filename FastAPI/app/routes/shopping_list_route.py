@@ -2,9 +2,9 @@
 This module contains the routes for managing shoppingList data.
 """
 from fastapi import APIRouter, Body, HTTPException
-from app.models.shoppingList_model import ShoppingList
 from peewee import DoesNotExist
-from app.services.shoppingList_service import (
+from app.models.shopping_list_model import ShoppingList
+from app.services.shopping_list_service import (
     create_shopping_list_service,
     get_all_shopping_lists_service,
     get_shopping_list_service,
@@ -15,17 +15,17 @@ from app.services.shoppingList_service import (
 shopping_list_router = APIRouter()
 
 @shopping_list_router.post("/")
-def create_shopping_list(shoppingList: ShoppingList = Body(...)):
+def create_shopping_list(shopping_list: ShoppingList = Body(...)):
     """
     Creates a new shoppingList in the database.
 
     Parameters:
-        shoppingList (ShoppingList): An object containing the shoppingList details.
+        shopping_list (ShoppingList): An object containing the shoppingList details.
         
     Returns:
         The created shoppingList object.
     """
-    return create_shopping_list_service(shoppingList)
+    return create_shopping_list_service(shopping_list)
 
 @shopping_list_router.get("/{shopping_list_id}")
 def read_shopping_list(shopping_list_id: int):
@@ -94,3 +94,4 @@ def delete_shopping_list(shopping_list_id: int):
         return delete_shopping_list_service(shopping_list_id)
     except DoesNotExist as exc:
         raise HTTPException(status_code=404, detail="ShoppingList not found") from exc
+    

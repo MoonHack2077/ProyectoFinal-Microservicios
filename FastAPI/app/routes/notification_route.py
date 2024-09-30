@@ -2,8 +2,8 @@
 This module contains the routes for managing notification data.
 """
 from fastapi import APIRouter, Body, HTTPException
-from app.models.notification_model import Notification
 from peewee import DoesNotExist
+from app.models.notification_model import Notification
 from app.services.notification_service import (
     create_notification_service,
     get_all_notifications_service,

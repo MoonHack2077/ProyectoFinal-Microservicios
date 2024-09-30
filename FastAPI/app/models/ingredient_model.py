@@ -1,8 +1,8 @@
 """
 This module contains the Pydantic model for ingredient data.
 """
-from pydantic import BaseModel
 from datetime import date
+from pydantic import BaseModel
 
 class Ingredient(BaseModel):
     """

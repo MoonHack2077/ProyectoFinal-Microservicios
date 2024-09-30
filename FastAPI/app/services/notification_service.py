@@ -70,7 +70,7 @@ def update_notification_service(notification_id: int, notification_data: Notific
         DoesNotExist: If the notification with the given ID does not exist.
     """
     notification = Notification.get_by_id(notification_id)
-    notification.message = notification_data.message,
+    notification.message = notification_data.message
     notification.dateNotification = notification_data.dateNotification
     notification.save()
     return notification

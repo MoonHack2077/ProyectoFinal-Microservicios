@@ -1,9 +1,10 @@
 """
 This module contains the routes for managing ingredient data.
 """
+
 from fastapi import APIRouter, Body, HTTPException
-from app.models.ingredient_model import Ingredient
 from peewee import DoesNotExist
+from app.models.ingredient_model import Ingredient
 from app.services.ingredient_service import (
     create_ingredient_service,
     get_all_ingredients_service,

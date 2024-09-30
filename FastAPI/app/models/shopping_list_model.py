@@ -10,3 +10,4 @@ class ShoppingList(BaseModel):
         idShoppingList (int): The unique identifier of the shopping list.
     """
     idShoppingList : int
+    

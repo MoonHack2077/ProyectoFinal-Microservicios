@@ -2,8 +2,8 @@
 This module contains the routes for managing recipe data.
 """
 from fastapi import APIRouter, Body, HTTPException
-from app.models.recipe_model import Recipe
 from peewee import DoesNotExist
+from app.models.recipe_model import Recipe
 from app.services.recipe_service import (
     create_recipe_service,
     get_all_recipes_service,
@@ -87,3 +87,4 @@ def delete_recipe(recipe_id: int):
         return delete_recipe_service(recipe_id)
     except DoesNotExist as exc:
         raise HTTPException(status_code=404, detail="Recipe not found") from exc
+    

@@ -2,8 +2,8 @@
 This module contains the routes for managing pantry data.
 """
 from fastapi import APIRouter, Body, HTTPException
-from app.models.pantry_model import Pantry
 from peewee import DoesNotExist
+from app.models.pantry_model import Pantry
 from app.services.pantry_service import (
     create_pantry_service,
     get_all_pantries_service,

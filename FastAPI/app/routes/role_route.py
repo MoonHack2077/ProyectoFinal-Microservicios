@@ -1,9 +1,10 @@
 """
 This module contains the routes for managing role data.
 """
+
 from fastapi import APIRouter, Body, HTTPException
-from app.models.role_model import Role
 from peewee import DoesNotExist
+from app.models.role_model import Role
 from app.services.role_service import (
     create_role_service,
     get_all_roles_service,
@@ -94,3 +95,5 @@ def delete_role(role_id: int):
         return delete_role_service(role_id)
     except DoesNotExist as exc:
         raise HTTPException(status_code=404, detail="Role not found") from exc
+    
+    

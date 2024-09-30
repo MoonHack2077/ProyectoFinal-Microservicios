@@ -2,8 +2,8 @@
 This module contains the routes for managing menu data.
 """
 from fastapi import APIRouter, Body, HTTPException
-from app.models.menu_model import Menu
 from peewee import DoesNotExist
+from app.models.menu_model import Menu
 from app.services.menu_service import (
     create_menu_service,
     get_all_menus_service,
@@ -94,3 +94,5 @@ def delete_menu(menu_id: int):
         return delete_menu_service(menu_id)
     except DoesNotExist as exc:
         raise HTTPException(status_code=404, detail="Menu not found") from exc
+
+

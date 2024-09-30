@@ -2,8 +2,8 @@
 This module contains the routes for managing family data.
 """
 from fastapi import APIRouter, Body, HTTPException
-from app.models.family_model import Family
 from peewee import DoesNotExist
+from app.models.family_model import Family
 from app.services.family_service import (
     create_family_service,
     get_all_families_service,
@@ -94,3 +94,4 @@ def delete_family(family_id: int):
         return delete_family_service(family_id)
     except DoesNotExist as exc:
         raise HTTPException(status_code=404, detail="Family not found") from exc
+    

@@ -76,9 +76,9 @@ def update_ingredient_service(ingredient_id: int, ingredient_data: Ingredient):
         DoesNotExist: If the ingredient with the given ID does not exist.
     """
     ingredient = Ingredient.get_by_id(ingredient_id)
-    ingredient.nameIngredient = ingredient_data.nameIngredient,
-    ingredient.amountIngredient = ingredient_data.amountIngredient,
-    ingredient.unitIngredient = ingredient_data.unitIngredient,
+    ingredient.nameIngredient = ingredient_data.nameIngredient
+    ingredient.amountIngredient = ingredient_data.amountIngredient
+    ingredient.unitIngredient = ingredient_data.unitIngredient
     ingredient.dateExpirationIngredient = ingredient_data.dateExpirationIngredient
     ingredient.save()
     return ingredient

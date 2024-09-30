@@ -1,18 +1,18 @@
 """This module contains the service functions for the shoppingList class."""
-from app.models.shoppingList_model import ShoppingList
+from app.models.shopping_list_model import ShoppingList
 
-def create_shopping_list_service(shoppingList):
+def create_shopping_list_service(shopping_list):
     """
     Creates a new shoppingList in the database.
 
     Args:
-        shoppingList (ShoppingList): An object containing the shoppingList details.
+        shopping_list (ShoppingList): An object containing the shoppingList details.
         
     Returns:
         ShoppingListModel: The created shoppingList record.
     """
     shopping_list_record = ShoppingList.create(
-        idShoppingList=shoppingList.idShoppingList
+        idShoppingList=shopping_list.idShoppingList
     )
     return shopping_list_record
 

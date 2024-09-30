@@ -110,4 +110,5 @@ def delete_recipe_service(recipe_id: int):
     """
     recipe = Recipe.get_by_id(recipe_id)
     recipe.delete_instance()
-    return {"message": "Recipe deleted successfully"}    
+    return {"message": "Recipe deleted successfully"}
+    

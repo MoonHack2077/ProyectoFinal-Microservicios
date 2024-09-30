@@ -70,7 +70,7 @@ def update_role_service(role_id: int, role_data: Role):
         DoesNotExist: If the role with the given ID does not exist.
     """
     role = Role.get_by_id(role_id)
-    role.nameRole = role_data.nameRole,
+    role.nameRole = role_data.nameRole
     role.permissions = role_data.permissions
     role.save()
     return role

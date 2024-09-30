@@ -1,10 +1,10 @@
 """
-This module contains the routes for managing categoryRecipe data.
+This module contains the routes for managing category_recipe data.
 """
 from fastapi import APIRouter, Body, HTTPException
-from app.models.categoryRecipe_model import CategoryRecipe
 from peewee import DoesNotExist
-from app.services.categoryRecipe_service import (
+from app.models.category_recipe_model import CategoryRecipe
+from app.services.category_recipe_service import (
     create_category_recipe_service,
     get_all_category_recipes_service,
     get_category_recipe_service,
@@ -15,17 +15,17 @@ from app.services.categoryRecipe_service import (
 category_recipe_router = APIRouter()
 
 @category_recipe_router.post("/")
-def create_category_recipe(categoryRecipe: CategoryRecipe = Body(...)):
+def create_category_recipe(category_recipe: CategoryRecipe = Body(...)):
     """
     Creates a new categoryRecipe in the database.
 
     Parameters:
-        categoryRecipe (CategoryRecipe): An object containing the categoryRecipe details.
+        category_recipe (CategoryRecipe): An object containing the categoryRecipe details.
         
     Returns:
         The created categoryRecipe object.
     """
-    return create_category_recipe_service(categoryRecipe)
+    return create_category_recipe_service(category_recipe)
 
 @category_recipe_router.get("/{category_recipe_id}")
 def read_category_recipe(category_recipe_id: int):
@@ -57,7 +57,8 @@ def read_category_recipes():
     return get_all_category_recipes_service()
 
 @category_recipe_router.put("/{category_recipe_id}")
-def update_category_recipe(category_recipe_id: int, category_recipe_data: CategoryRecipe = Body(...)):
+def update_category_recipe(category_recipe_id: int, 
+                           category_recipe_data: CategoryRecipe = Body(...)):
     """
     Update a categoryRecipe with the given category_recipe_id and category_recipe_data.
 
@@ -94,3 +95,4 @@ def delete_category_recipe(category_recipe_id: int):
         return delete_category_recipe_service(category_recipe_id)
     except DoesNotExist as exc:
         raise HTTPException(status_code=404, detail="CategoryRecipe not found") from exc
+    

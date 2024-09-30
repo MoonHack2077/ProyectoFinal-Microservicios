@@ -1,6 +1,4 @@
 """This module contains the database configuration and models for the FastAPI application."""
-import os
-from dotenv import load_dotenv
 from app.config.settings import DATABASE
 from peewee import AutoField, CharField, DateField, ForeignKeyField, Model, MySQLDatabase, TimeField
 
@@ -104,6 +102,7 @@ class Pantry(Model):
     userId = ForeignKeyField(User, backref='pantries')
 
     class Meta:
+        """Defines the metadata for the Pantry model."""
         database = database
         db_table = "pantries"
         

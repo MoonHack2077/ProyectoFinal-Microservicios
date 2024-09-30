@@ -2,9 +2,9 @@
 This module contains the routes for managing ingredient inventory data.
 """
 from fastapi import APIRouter, Body, HTTPException
-from app.models.ingredientInventory_model import IngredientInventory
 from peewee import DoesNotExist
-from app.services.ingredientInventory_service import (
+from app.models.ingredient_inventory_model import IngredientInventory
+from app.services.ingredient_inventory_service import (
     create_ingredient_inventory_service,
     get_all_ingredient_inventories_service,
     get_ingredient_inventory_service,
@@ -57,9 +57,11 @@ def read_ingredient_inventories():
     return get_all_ingredient_inventories_service()
 
 @ingredient_inventory_router.put("/{ingredient_inventory_id}")
-def update_ingredient_inventory(ingredient_inventory_id: int, ingredient_inventory_data: IngredientInventory = Body(...)):
+def update_ingredient_inventory(ingredient_inventory_id: int, 
+                                ingredient_inventory_data: IngredientInventory = Body(...)):
     """
-    Update an ingredient inventory with the given ingredient_inventory_id and ingredient_inventory_data.
+    Update an ingredient inventory with the given 
+    ingredient_inventory_id and ingredient_inventory_data.
 
     Parameters:
         ingredient_inventory_id (int): The ID of the ingredient inventory to update.
@@ -72,7 +74,8 @@ def update_ingredient_inventory(ingredient_inventory_id: int, ingredient_invento
         HTTPException: If the ingredient inventory with the given ID does not exist.
     """
     try:
-        return update_ingredient_inventory_service(ingredient_inventory_id, ingredient_inventory_data)
+        return update_ingredient_inventory_service(ingredient_inventory_id, 
+                                                   ingredient_inventory_data)
     except DoesNotExist as exc:
         raise HTTPException(status_code=404, detail="Ingredient inventory not found") from exc
     

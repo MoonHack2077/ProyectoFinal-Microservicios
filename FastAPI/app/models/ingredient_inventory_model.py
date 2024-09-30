@@ -1,8 +1,8 @@
 """
 This module contains the Pydantic model for ingredient inventory data.
 """
-from pydantic import BaseModel
 from datetime import date
+from pydantic import BaseModel
 
 class IngredientInventory(BaseModel):
     """
@@ -19,3 +19,4 @@ class IngredientInventory(BaseModel):
     amount : float
     unit : str
     dateExpiration : date
+    

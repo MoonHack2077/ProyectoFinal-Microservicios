@@ -1,8 +1,8 @@
 """
 This module contains the Pydantic model for menu data.
 """
-from pydantic import BaseModel
 from datetime import date
+from pydantic import BaseModel
 
 class Menu(BaseModel):
     """

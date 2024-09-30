@@ -28,7 +28,7 @@ jobs:
 
       - name: Run Pylint on the whole project
         run: |
-          pylint ./**/*.py
+          pylint ./**/*.py --fail-under=7
 
       - name: Analysing the code with pylint
         run: |
@@ -38,4 +38,4 @@ jobs:
             echo "Rate is not greater than 7. Skipping pylint analysis."
           fi
 
-          
+      

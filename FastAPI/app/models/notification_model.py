@@ -1,8 +1,10 @@
 """
 This module contains the Pydantic model for notification data.
 """
+
 from datetime import date
 from pydantic import BaseModel
+
 
 class Notification(BaseModel):
     """
@@ -12,6 +14,7 @@ class Notification(BaseModel):
         message (str): The message of the notification.
         dateNotification (date): The date of the notification.
     """
-    idNotification : int
-    message : str
-    dateNotification : date
+
+    idNotification: int
+    message: str
+    dateNotification: date

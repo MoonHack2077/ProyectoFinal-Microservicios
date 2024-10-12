@@ -1,6 +1,7 @@
 """
 This module contains the routes for managing menu data.
 """
+
 from fastapi import APIRouter, Body, HTTPException
 from peewee import DoesNotExist
 from app.models.menu_model import Menu
@@ -9,10 +10,11 @@ from app.services.menu_service import (
     get_all_menus_service,
     get_menu_service,
     update_menu_service,
-    delete_menu_service
+    delete_menu_service,
 )
 
 menu_router = APIRouter()
+
 
 @menu_router.post("/")
 def create_menu(menu: Menu = Body(...)):
@@ -21,11 +23,12 @@ def create_menu(menu: Menu = Body(...)):
 
     Parameters:
         menu (Menu): An object containing the menu details.
-        
+
     Returns:
         The created menu object.
     """
     return create_menu_service(menu)
+
 
 @menu_router.get("/{menu_id}")
 def read_menu(menu_id: int):
@@ -46,6 +49,7 @@ def read_menu(menu_id: int):
     except DoesNotExist as exc:
         raise HTTPException(status_code=404, detail="Menu not found") from exc
 
+
 @menu_router.get("/")
 def read_menus():
     """
@@ -55,6 +59,7 @@ def read_menus():
         List[Menu]: A list of all menus.
     """
     return get_all_menus_service()
+
 
 @menu_router.put("/{menu_id}")
 def update_menu(menu_id: int, menu_data: Menu = Body(...)):
@@ -76,6 +81,7 @@ def update_menu(menu_id: int, menu_data: Menu = Body(...)):
     except DoesNotExist as exc:
         raise HTTPException(status_code=404, detail="Menu not found") from exc
 
+
 @menu_router.delete("/{menu_id}")
 def delete_menu(menu_id: int):
     """
@@ -94,5 +100,3 @@ def delete_menu(menu_id: int):
         return delete_menu_service(menu_id)
     except DoesNotExist as exc:
         raise HTTPException(status_code=404, detail="Menu not found") from exc
-
-

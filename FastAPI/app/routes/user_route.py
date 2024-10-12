@@ -10,10 +10,11 @@ from app.services.user_service import (
     get_all_users_service,
     get_user_service,
     update_user_service,
-    delete_user_service
+    delete_user_service,
 )
 
 user_router = APIRouter()
+
 
 @user_router.post("/")
 def create_user(user: User = Body(...)):
@@ -22,11 +23,12 @@ def create_user(user: User = Body(...)):
 
     Parameters:
         user (User): An object containing the user details.
-        
+
     Returns:
         The created user object.
     """
     return create_user_service(user)
+
 
 @user_router.get("/{user_id}")
 def read_user(user_id: int):
@@ -47,6 +49,7 @@ def read_user(user_id: int):
     except DoesNotExist as exc:
         raise HTTPException(status_code=404, detail="User not found") from exc
 
+
 @user_router.get("/")
 def read_users():
     """
@@ -56,6 +59,7 @@ def read_users():
         List[User]: A list of all users.
     """
     return get_all_users_service()
+
 
 @user_router.put("/{user_id}")
 def update_user(user_id: int, user_data: User = Body(...)):
@@ -77,6 +81,7 @@ def update_user(user_id: int, user_data: User = Body(...)):
     except DoesNotExist as exc:
         raise HTTPException(status_code=404, detail="User not found") from exc
 
+
 @user_router.delete("/{user_id}")
 def delete_user(user_id: int):
     """
@@ -95,4 +100,3 @@ def delete_user(user_id: int):
         return delete_user_service(user_id)
     except DoesNotExist as exc:
         raise HTTPException(status_code=404, detail="User not found") from exc
-

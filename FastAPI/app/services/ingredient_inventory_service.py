@@ -1,5 +1,7 @@
 """This module contains the service functions for the ingredientInventory class."""
+
 from app.models.ingredient_inventory_model import IngredientInventory
+
 
 def create_ingredient_inventory_service(ingredient_inventory):
     """
@@ -7,7 +9,7 @@ def create_ingredient_inventory_service(ingredient_inventory):
 
     Args:
         ingredient_inventory (IngredientInventory): An object containing the ingredient details.
-        
+
     Returns:
         IngredientInventoryModel: The created ingredientInventory record.
     """
@@ -16,9 +18,10 @@ def create_ingredient_inventory_service(ingredient_inventory):
         name=ingredient_inventory.name,
         amount=ingredient_inventory.amount,
         unit=ingredient_inventory.unit,
-        dateExpiration=ingredient_inventory.dateExpiration
+        dateExpiration=ingredient_inventory.dateExpiration,
     )
     return ingredient_inventory_record
+
 
 def get_ingredient_inventory_service(ingredient_inventory_id: int):
     """
@@ -29,7 +32,7 @@ def get_ingredient_inventory_service(ingredient_inventory_id: int):
 
     Returns:
         DICT: A dictionary containing the ingredientInventory's details.
-        
+
     Raises:
         DoesNotExist: If the ingredientInventory with the given ID does not exist.
     """
@@ -39,9 +42,10 @@ def get_ingredient_inventory_service(ingredient_inventory_id: int):
         "name": ingredient_inventory.name,
         "amount": ingredient_inventory.amount,
         "unit": ingredient_inventory.unit,
-        "date_expiration": ingredient_inventory.dateExpiration
+        "date_expiration": ingredient_inventory.dateExpiration,
     }
-    
+
+
 def get_all_ingredient_inventories_service():
     """
     Retrieves all ingredientInventories from the database.
@@ -52,28 +56,30 @@ def get_all_ingredient_inventories_service():
     ingredient_inventories = list(IngredientInventory.select())
     return [
         {
-        "id": ingredient_inventory.idIngredientInventory,
-        "name": ingredient_inventory.name,
-        "amount": ingredient_inventory.amount,
-        "unit": ingredient_inventory.unit,
-        "date_expiration": ingredient_inventory.dateExpiration
+            "id": ingredient_inventory.idIngredientInventory,
+            "name": ingredient_inventory.name,
+            "amount": ingredient_inventory.amount,
+            "unit": ingredient_inventory.unit,
+            "date_expiration": ingredient_inventory.dateExpiration,
         }
         for ingredient_inventory in ingredient_inventories
     ]
-    
-def update_ingredient_inventory_service(ingredient_inventory_id: int, 
-                                        ingredient_inventory_data: IngredientInventory):
+
+
+def update_ingredient_inventory_service(
+    ingredient_inventory_id: int, ingredient_inventory_data: IngredientInventory
+):
     """
     Updates an existing ingredientInventory's details by its ID.
 
     Args:
         ingredient_inventory_id (int): The ID of the ingredientInventory to update.
-        ingredient_inventory_data (IngredientInventory): An object containing the 
+        ingredient_inventory_data (IngredientInventory): An object containing the
         updated ingredientInventory details.
-        
+
     Returns:
         IngredientInventoryModel: The updated ingredientInventory record.
-        
+
     Raises:
         DoesNotExist: If the ingredientInventory with the given ID does not exist.
     """
@@ -85,16 +91,17 @@ def update_ingredient_inventory_service(ingredient_inventory_id: int,
     ingredient_inventory.save()
     return ingredient_inventory
 
+
 def delete_ingredient_inventory_service(ingredient_inventory_id: int):
     """
     Deletes an ingredientInventory from the database by its ID.
 
     Args:
         ingredient_inventory_id (int): The ID of the ingredientInventory to delete.
-        
+
     Returns:
         dict: A message confirming the deletion.
-        
+
     Raises:
         DoesNotExist: If the ingredientInventory with the given ID does not exist.
     """

@@ -1,6 +1,7 @@
 """
 This module contains the routes for managing recipe data.
 """
+
 from fastapi import APIRouter, Body, HTTPException
 from peewee import DoesNotExist
 from app.models.recipe_model import Recipe
@@ -9,10 +10,11 @@ from app.services.recipe_service import (
     get_all_recipes_service,
     get_recipe_service,
     update_recipe_service,
-    delete_recipe_service
+    delete_recipe_service,
 )
 
 recipe_router = APIRouter()
+
 
 @recipe_router.post("/")
 def create_recipe(recipe: Recipe = Body(...)):
@@ -21,12 +23,13 @@ def create_recipe(recipe: Recipe = Body(...)):
 
     Parameters:
         recipe (Recipe): An object containing the recipe details.
-        
+
     Returns:
         The created recipe object.
     """
 
     return create_recipe_service(recipe)
+
 
 @recipe_router.get("/{recipe_id}")
 def read_recipe(recipe_id: int):
@@ -44,7 +47,8 @@ def read_recipe(recipe_id: int):
         return get_recipe_service(recipe_id)
     except DoesNotExist as exc:
         raise HTTPException(status_code=404, detail="Recipe not found") from exc
-    
+
+
 @recipe_router.get("/")
 def read_recipes():
     """
@@ -54,6 +58,7 @@ def read_recipes():
     """
 
     return get_all_recipes_service()
+
 
 @recipe_router.put("/{recipe_id}")
 def update_recipe(recipe_id: int, recipe_data: Recipe = Body(...)):
@@ -71,7 +76,8 @@ def update_recipe(recipe_id: int, recipe_data: Recipe = Body(...)):
         return update_recipe_service(recipe_id, recipe_data)
     except DoesNotExist as exc:
         raise HTTPException(status_code=404, detail="Recipe not found") from exc
-    
+
+
 @recipe_router.delete("/{recipe_id}")
 def delete_recipe(recipe_id: int):
     """
@@ -87,4 +93,3 @@ def delete_recipe(recipe_id: int):
         return delete_recipe_service(recipe_id)
     except DoesNotExist as exc:
         raise HTTPException(status_code=404, detail="Recipe not found") from exc
-    

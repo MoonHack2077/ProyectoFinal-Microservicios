@@ -1,4 +1,5 @@
 """This module contains the settings for the FastAPI application."""
+
 import os
 from dotenv import load_dotenv
 

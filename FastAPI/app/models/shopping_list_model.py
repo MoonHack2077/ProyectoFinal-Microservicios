@@ -1,7 +1,9 @@
 """
 This module contains the Pydantic model for shopping list data.
 """
+
 from pydantic import BaseModel
+
 
 class ShoppingList(BaseModel):
     """
@@ -9,5 +11,5 @@ class ShoppingList(BaseModel):
     Attributes:
         idShoppingList (int): The unique identifier of the shopping list.
     """
-    idShoppingList : int
-    
+
+    idShoppingList: int

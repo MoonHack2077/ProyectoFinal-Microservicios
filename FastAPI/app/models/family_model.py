@@ -1,7 +1,9 @@
 """
 This module contains the Pydantic model for family data.
 """
+
 from pydantic import BaseModel
+
 
 class Family(BaseModel):
     """
@@ -10,5 +12,6 @@ class Family(BaseModel):
         idFamily (int): The unique identifier of the user.
         nameFamily (str): The name of the user.
     """
-    idFamily : int
-    nameFamily : str
+
+    idFamily: int
+    nameFamily: str

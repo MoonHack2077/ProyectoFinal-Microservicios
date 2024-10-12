@@ -10,10 +10,11 @@ from app.services.category_ingredient_service import (
     get_all_category_ingredients_service,
     get_category_ingredient_service,
     update_category_ingredient_service,
-    delete_category_ingredient_service
+    delete_category_ingredient_service,
 )
 
 category_ingredient_router = APIRouter()
+
 
 @category_ingredient_router.post("/")
 def create_category_ingredient(category_ingredient: CategoryIngredient = Body(...)):
@@ -21,13 +22,14 @@ def create_category_ingredient(category_ingredient: CategoryIngredient = Body(..
     Creates a new category ingredient in the database.
 
     Parameters:
-        category_ingredient (CategoryIngredient): An object containing 
+        category_ingredient (CategoryIngredient): An object containing
         the category ingredient details.
-        
+
     Returns:
         The created category ingredient object.
     """
     return create_category_ingredient_service(category_ingredient)
+
 
 @category_ingredient_router.get("/{category_ingredient_id}")
 def read_category_ingredient(category_ingredient_id: int):
@@ -46,7 +48,10 @@ def read_category_ingredient(category_ingredient_id: int):
     try:
         return get_category_ingredient_service(category_ingredient_id)
     except DoesNotExist as exc:
-        raise HTTPException(status_code=404, detail="CategoryIngredient not found") from exc
+        raise HTTPException(
+            status_code=404, detail="CategoryIngredient not found"
+        ) from exc
+
 
 @category_ingredient_router.get("/")
 def read_category_ingredients():
@@ -58,9 +63,12 @@ def read_category_ingredients():
     """
     return get_all_category_ingredients_service()
 
+
 @category_ingredient_router.put("/{category_ingredient_id}")
-def update_category_ingredient(category_ingredient_id: int, 
-                               category_ingredient_data: CategoryIngredient = Body(...)):
+def update_category_ingredient(
+    category_ingredient_id: int,
+    category_ingredient_data: CategoryIngredient = Body(...),
+):
     """
     Update a category ingredient with the given category_ingredient_id and category_ingredient_data.
 
@@ -75,9 +83,14 @@ def update_category_ingredient(category_ingredient_id: int,
         HTTPException: If the category ingredient with the given ID does not exist.
     """
     try:
-        return update_category_ingredient_service(category_ingredient_id, category_ingredient_data)
+        return update_category_ingredient_service(
+            category_ingredient_id, category_ingredient_data
+        )
     except DoesNotExist as exc:
-        raise HTTPException(status_code=404, detail="CategoryIngredient not found") from exc
+        raise HTTPException(
+            status_code=404, detail="CategoryIngredient not found"
+        ) from exc
+
 
 @category_ingredient_router.delete("/{category_ingredient_id}")
 def delete_category_ingredient(category_ingredient_id: int):
@@ -96,6 +109,9 @@ def delete_category_ingredient(category_ingredient_id: int):
     try:
         return delete_category_ingredient_service(category_ingredient_id)
     except DoesNotExist as exc:
-        raise HTTPException(status_code=404, detail="CategoryIngredient not found") from exc
+        raise HTTPException(
+            status_code=404, detail="CategoryIngredient not found"
+        ) from exc
+
 
 # Asegúrate de que haya una línea en blanco al final del archivo

@@ -1,5 +1,7 @@
 """This module contains the service functions for the menu class."""
+
 from app.models.menu_model import Menu
+
 
 def create_menu_service(menu):
     """
@@ -7,15 +9,13 @@ def create_menu_service(menu):
 
     Args:
         menu (Menu): An object containing the menu details.
-        
+
     Returns:
         MenuModel: The created menu record.
     """
-    menu_record = Menu.create(
-        idMenu=menu.idMenu,
-        dateMenu=menu.dateMenu
-    )
+    menu_record = Menu.create(idMenu=menu.idMenu, dateMenu=menu.dateMenu)
     return menu_record
+
 
 def get_menu_service(menu_id: int):
     """
@@ -26,15 +26,13 @@ def get_menu_service(menu_id: int):
 
     Returns:
         DICT: A dictionary containing the menu's details.
-        
+
     Raises:
         DoesNotExist: If the menu with the given ID does not exist.
     """
     menu = Menu.get_by_id(menu_id)
-    return {
-        "id": menu.idMenu,
-        "date": menu.dateMenu
-    }
+    return {"id": menu.idMenu, "date": menu.dateMenu}
+
 
 def get_all_menus_service():
     """
@@ -44,13 +42,8 @@ def get_all_menus_service():
         List: A list of dictionaries containing the data of each menu's details.
     """
     menus = list(Menu.select())
-    return [
-        {
-        "id": menu.idMenu,
-        "date": menu.dateMenu
-        }
-        for menu in menus
-    ]
+    return [{"id": menu.idMenu, "date": menu.dateMenu} for menu in menus]
+
 
 def update_menu_service(menu_id: int, menu_data: Menu):
     """
@@ -59,10 +52,10 @@ def update_menu_service(menu_id: int, menu_data: Menu):
     Args:
         menu_id (int): The ID of the menu to update.
         menu_data (Menu): An object containing the updated menu details.
-        
+
     Returns:
         MenuModel: The updated menu record.
-        
+
     Raises:
         DoesNotExist: If the menu with the given ID does not exist.
     """
@@ -71,16 +64,17 @@ def update_menu_service(menu_id: int, menu_data: Menu):
     menu.save()
     return menu
 
+
 def delete_menu_service(menu_id: int):
     """
     Deletes a menu from the database by its ID.
 
     Args:
         menu_id (int): The ID of the menu to delete.
-        
+
     Returns:
         dict: A message confirming the deletion.
-        
+
     Raises:
         DoesNotExist: If the menu with the given ID does not exist.
     """

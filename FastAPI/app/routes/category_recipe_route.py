@@ -1,6 +1,7 @@
 """
 This module contains the routes for managing category_recipe data.
 """
+
 from fastapi import APIRouter, Body, HTTPException
 from peewee import DoesNotExist
 from app.models.category_recipe_model import CategoryRecipe
@@ -9,10 +10,11 @@ from app.services.category_recipe_service import (
     get_all_category_recipes_service,
     get_category_recipe_service,
     update_category_recipe_service,
-    delete_category_recipe_service
+    delete_category_recipe_service,
 )
 
 category_recipe_router = APIRouter()
+
 
 @category_recipe_router.post("/")
 def create_category_recipe(category_recipe: CategoryRecipe = Body(...)):
@@ -21,11 +23,12 @@ def create_category_recipe(category_recipe: CategoryRecipe = Body(...)):
 
     Parameters:
         category_recipe (CategoryRecipe): An object containing the categoryRecipe details.
-        
+
     Returns:
         The created categoryRecipe object.
     """
     return create_category_recipe_service(category_recipe)
+
 
 @category_recipe_router.get("/{category_recipe_id}")
 def read_category_recipe(category_recipe_id: int):
@@ -46,6 +49,7 @@ def read_category_recipe(category_recipe_id: int):
     except DoesNotExist as exc:
         raise HTTPException(status_code=404, detail="CategoryRecipe not found") from exc
 
+
 @category_recipe_router.get("/")
 def read_category_recipes():
     """
@@ -56,9 +60,11 @@ def read_category_recipes():
     """
     return get_all_category_recipes_service()
 
+
 @category_recipe_router.put("/{category_recipe_id}")
-def update_category_recipe(category_recipe_id: int, 
-                           category_recipe_data: CategoryRecipe = Body(...)):
+def update_category_recipe(
+    category_recipe_id: int, category_recipe_data: CategoryRecipe = Body(...)
+):
     """
     Update a categoryRecipe with the given category_recipe_id and category_recipe_data.
 
@@ -76,6 +82,7 @@ def update_category_recipe(category_recipe_id: int,
         return update_category_recipe_service(category_recipe_id, category_recipe_data)
     except DoesNotExist as exc:
         raise HTTPException(status_code=404, detail="CategoryRecipe not found") from exc
+
 
 @category_recipe_router.delete("/{category_recipe_id}")
 def delete_category_recipe(category_recipe_id: int):
@@ -95,4 +102,3 @@ def delete_category_recipe(category_recipe_id: int):
         return delete_category_recipe_service(category_recipe_id)
     except DoesNotExist as exc:
         raise HTTPException(status_code=404, detail="CategoryRecipe not found") from exc
-    

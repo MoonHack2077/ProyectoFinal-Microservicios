@@ -1,7 +1,9 @@
 """
 This module contains the Pydantic model for recipe data.
 """
+
 from pydantic import BaseModel
+
 
 class Recipe(BaseModel):
     """
@@ -16,11 +18,12 @@ class Recipe(BaseModel):
         instructions (str): The instructions of the recipe.
         nutritionalData (str): The nutritional data of the recipe.
     """
-    idRecipe : int
-    nameRecipe : str
-    descriptionRecipe : str
-    category : str
-    difficulty : str
-    timePreparation : int
-    instructions : str
-    nutritionalData : str
+
+    idRecipe: int
+    nameRecipe: str
+    descriptionRecipe: str
+    category: str
+    difficulty: str
+    timePreparation: int
+    instructions: str
+    nutritionalData: str

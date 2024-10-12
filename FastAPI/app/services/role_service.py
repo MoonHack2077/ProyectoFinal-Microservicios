@@ -1,5 +1,7 @@
 """This module contains the service functions for the role class."""
+
 from app.models.role_model import Role
+
 
 def create_role_service(role):
     """
@@ -7,16 +9,15 @@ def create_role_service(role):
 
     Args:
         role (Role): An object containing the role details.
-        
+
     Returns:
         RoleModel: The created role record.
     """
     role_record = Role.create(
-        idRole=role.idRole,
-        name=role.nameRole,
-        permissions=role.permissions
+        idRole=role.idRole, name=role.nameRole, permissions=role.permissions
     )
     return role_record
+
 
 def get_role_service(role_id: int):
     """
@@ -27,16 +28,13 @@ def get_role_service(role_id: int):
 
     Returns:
         DICT: A dictionary containing the role's details.
-        
+
     Raises:
         DoesNotExist: If the role with the given ID does not exist.
     """
     role = Role.get_by_id(role_id)
-    return {
-        "id": role.idRole,
-        "name": role.nameRole,
-        "permissions": role.permissions
-    }
+    return {"id": role.idRole, "name": role.nameRole, "permissions": role.permissions}
+
 
 def get_all_roles_service():
     """
@@ -47,13 +45,10 @@ def get_all_roles_service():
     """
     roles = list(Role.select())
     return [
-        {
-        "id": role.idRole,
-        "name": role.nameRole,
-        "permissions": role.permissions
-        }
+        {"id": role.idRole, "name": role.nameRole, "permissions": role.permissions}
         for role in roles
     ]
+
 
 def update_role_service(role_id: int, role_data: Role):
     """
@@ -62,10 +57,10 @@ def update_role_service(role_id: int, role_data: Role):
     Args:
         role_id (int): The ID of the role to update.
         role_data (Role): An object containing the updated role details.
-        
+
     Returns:
         RoleModel: The updated role record.
-        
+
     Raises:
         DoesNotExist: If the role with the given ID does not exist.
     """
@@ -75,16 +70,17 @@ def update_role_service(role_id: int, role_data: Role):
     role.save()
     return role
 
+
 def delete_role_service(role_id: int):
     """
     Deletes a role from the database by its ID.
 
     Args:
         role_id (int): The ID of the role to delete.
-        
+
     Returns:
         dict: A message confirming the deletion.
-        
+
     Raises:
         DoesNotExist: If the role with the given ID does not exist.
     """

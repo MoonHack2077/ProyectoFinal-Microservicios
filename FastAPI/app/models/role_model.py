@@ -1,7 +1,9 @@
 """
 This module contains the Pydantic model for role data.
 """
+
 from pydantic import BaseModel
+
 
 class Role(BaseModel):
     """
@@ -11,6 +13,7 @@ class Role(BaseModel):
         nameRole (str): The name of the user.
         permissions (str): The permissions of the user.
     """
-    idRole : int
-    nameRole : str
-    permissions : str
+
+    idRole: int
+    nameRole: str
+    permissions: str

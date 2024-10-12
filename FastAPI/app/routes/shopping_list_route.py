@@ -1,6 +1,7 @@
 """
 This module contains the routes for managing shoppingList data.
 """
+
 from fastapi import APIRouter, Body, HTTPException
 from peewee import DoesNotExist
 from app.models.shopping_list_model import ShoppingList
@@ -8,11 +9,12 @@ from app.services.shopping_list_service import (
     create_shopping_list_service,
     get_all_shopping_lists_service,
     get_shopping_list_service,
-    #update_shopping_list_service,
-    delete_shopping_list_service
+    # update_shopping_list_service,
+    delete_shopping_list_service,
 )
 
 shopping_list_router = APIRouter()
+
 
 @shopping_list_router.post("/")
 def create_shopping_list(shopping_list: ShoppingList = Body(...)):
@@ -21,11 +23,12 @@ def create_shopping_list(shopping_list: ShoppingList = Body(...)):
 
     Parameters:
         shopping_list (ShoppingList): An object containing the shoppingList details.
-        
+
     Returns:
         The created shoppingList object.
     """
     return create_shopping_list_service(shopping_list)
+
 
 @shopping_list_router.get("/{shopping_list_id}")
 def read_shopping_list(shopping_list_id: int):
@@ -46,6 +49,7 @@ def read_shopping_list(shopping_list_id: int):
     except DoesNotExist as exc:
         raise HTTPException(status_code=404, detail="ShoppingList not found") from exc
 
+
 @shopping_list_router.get("/")
 def read_shopping_lists():
     """
@@ -55,6 +59,7 @@ def read_shopping_lists():
         List[ShoppingList]: A list of all shoppingLists.
     """
     return get_all_shopping_lists_service()
+
 
 # @shopping_list_router.put("/{shopping_list_id}")
 # def update_shopping_list(shopping_list_id: int, shopping_list_data: ShoppingList = Body(...)):
@@ -76,6 +81,7 @@ def read_shopping_lists():
 #     except DoesNotExist as exc:
 #         raise HTTPException(status_code=404, detail="ShoppingList not found") from exc
 
+
 @shopping_list_router.delete("/{shopping_list_id}")
 def delete_shopping_list(shopping_list_id: int):
     """
@@ -94,4 +100,3 @@ def delete_shopping_list(shopping_list_id: int):
         return delete_shopping_list_service(shopping_list_id)
     except DoesNotExist as exc:
         raise HTTPException(status_code=404, detail="ShoppingList not found") from exc
-    

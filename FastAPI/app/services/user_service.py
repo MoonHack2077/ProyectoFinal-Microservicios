@@ -1,5 +1,7 @@
 """This module contains the service functions for the user class."""
+
 from app.models.user_model import User
+
 
 def create_user_service(user):
     """
@@ -7,7 +9,7 @@ def create_user_service(user):
 
     Args:
         user (User): An object containing the user details.
-        
+
     Returns:
         UserModel: The created user record.
     """
@@ -16,9 +18,10 @@ def create_user_service(user):
         name=user.name,
         password=user.password,
         email=user.email,
-        photo=user.photo
+        photo=user.photo,
     )
     return user_record
+
 
 def get_user_service(user_id: int):
     """
@@ -29,19 +32,20 @@ def get_user_service(user_id: int):
 
     Returns:
         DICT: A dictionary containing the user's details.
-        
+
     Raises:
         DoesNotExist: If the user with the given ID does not exist.
     """
     user = User.get_by_id(user_id)
-    return{
+    return {
         "id": user.idUser,
         "name": user.name,
         "password": user.password,
         "email": user.email,
-        "photo": user.photo
+        "photo": user.photo,
     }
-    
+
+
 def get_all_users_service():
     """
     Retrieves all users from the database.
@@ -52,15 +56,16 @@ def get_all_users_service():
     users = list(User.select())
     return [
         {
-        "id": user.idUser,
-        "name": user.name,
-        "password": user.password,
-        "email": user.email,
-        "photo": user.photo
+            "id": user.idUser,
+            "name": user.name,
+            "password": user.password,
+            "email": user.email,
+            "photo": user.photo,
         }
         for user in users
     ]
-    
+
+
 def update_user_service(user_id: int, user_data: User):
     """
     Updates an existing user's details by their ID.
@@ -68,10 +73,10 @@ def update_user_service(user_id: int, user_data: User):
     Args:
         user_id (int): The ID of the customer to update.
         user_data (User): An object containing the updated user details.
-        
+
     Returns:
         UserModel: The updated user record.
-        
+
     Raises:
         DoesNotExist: If the user with the given ID does not exist.
     """
@@ -83,16 +88,17 @@ def update_user_service(user_id: int, user_data: User):
     user.save()
     return user
 
+
 def delete_user_service(user_id: int):
     """
     Deletes a user from the database by their ID.
 
     Args:
         user_id (int): The ID of the user to delete.
-        
+
     Returns:
         dict: A message confirming the deletion.
-        
+
     Raises:
         DoesNotExist: If the user with the given ID does not exist.
     """

@@ -1,5 +1,7 @@
 """This module contains the service functions for the ingredient class."""
+
 from app.models.ingredient_model import Ingredient
+
 
 def create_ingredient_service(ingredient):
     """
@@ -7,7 +9,7 @@ def create_ingredient_service(ingredient):
 
     Args:
         ingredient (Ingredient): An object containing the ingredient details.
-        
+
     Returns:
         IngredientModel: The created ingredient record.
     """
@@ -16,9 +18,10 @@ def create_ingredient_service(ingredient):
         nameIngredient=ingredient.nameIngredient,
         amountIngredient=ingredient.amountIngredient,
         unitIngredient=ingredient.unitIngredient,
-        dateExpirationIngredient=ingredient.dateExpirationIngredient
+        dateExpirationIngredient=ingredient.dateExpirationIngredient,
     )
     return ingredient_record
+
 
 def get_ingredient_service(ingredient_id: int):
     """
@@ -29,7 +32,7 @@ def get_ingredient_service(ingredient_id: int):
 
     Returns:
         DICT: A dictionary containing the ingredient's details.
-        
+
     Raises:
         DoesNotExist: If the ingredient with the given ID does not exist.
     """
@@ -39,9 +42,10 @@ def get_ingredient_service(ingredient_id: int):
         "name": ingredient.nameIngredient,
         "amount": ingredient.amountIngredient,
         "unit": ingredient.unitIngredient,
-        "date_expiration": ingredient.dateExpirationIngredient
+        "date_expiration": ingredient.dateExpirationIngredient,
     }
-    
+
+
 def get_all_ingredients_service():
     """
     Retrieves all ingredients from the database.
@@ -56,11 +60,12 @@ def get_all_ingredients_service():
             "name": ingredient.nameIngredient,
             "amount": ingredient.amountIngredient,
             "unit": ingredient.unitIngredient,
-            "date_expiration": ingredient.dateExpirationIngredient
+            "date_expiration": ingredient.dateExpirationIngredient,
         }
         for ingredient in ingredients
     ]
-    
+
+
 def update_ingredient_service(ingredient_id: int, ingredient_data: Ingredient):
     """
     Updates an existing ingredient's details by its ID.
@@ -68,10 +73,10 @@ def update_ingredient_service(ingredient_id: int, ingredient_data: Ingredient):
     Args:
         ingredient_id (int): The ID of the ingredient to update.
         ingredient_data (Ingredient): An object containing the updated ingredient details.
-        
+
     Returns:
         IngredientModel: The updated ingredient record.
-        
+
     Raises:
         DoesNotExist: If the ingredient with the given ID does not exist.
     """
@@ -83,16 +88,17 @@ def update_ingredient_service(ingredient_id: int, ingredient_data: Ingredient):
     ingredient.save()
     return ingredient
 
+
 def delete_ingredient_service(ingredient_id: int):
     """
     Deletes an ingredient from the database by its ID.
 
     Args:
         ingredient_id (int): The ID of the ingredient to delete.
-        
+
     Returns:
         dict: A message confirming the deletion.
-        
+
     Raises:
         DoesNotExist: If the ingredient with the given ID does not exist.
     """

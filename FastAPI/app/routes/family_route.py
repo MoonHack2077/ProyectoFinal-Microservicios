@@ -1,6 +1,7 @@
 """
 This module contains the routes for managing family data.
 """
+
 from fastapi import APIRouter, Body, HTTPException
 from peewee import DoesNotExist
 from app.models.family_model import Family
@@ -9,10 +10,11 @@ from app.services.family_service import (
     get_all_families_service,
     get_family_service,
     update_family_service,
-    delete_family_service
+    delete_family_service,
 )
 
 family_router = APIRouter()
+
 
 @family_router.post("/")
 def create_family(family: Family = Body(...)):
@@ -21,11 +23,12 @@ def create_family(family: Family = Body(...)):
 
     Parameters:
         family (Family): An object containing the family details.
-        
+
     Returns:
         The created family object.
     """
     return create_family_service(family)
+
 
 @family_router.get("/{family_id}")
 def read_family(family_id: int):
@@ -46,6 +49,7 @@ def read_family(family_id: int):
     except DoesNotExist as exc:
         raise HTTPException(status_code=404, detail="Family not found") from exc
 
+
 @family_router.get("/")
 def read_families():
     """
@@ -55,6 +59,7 @@ def read_families():
         List[Family]: A list of all families.
     """
     return get_all_families_service()
+
 
 @family_router.put("/{family_id}")
 def update_family(family_id: int, family_data: Family = Body(...)):
@@ -76,6 +81,7 @@ def update_family(family_id: int, family_data: Family = Body(...)):
     except DoesNotExist as exc:
         raise HTTPException(status_code=404, detail="Family not found") from exc
 
+
 @family_router.delete("/{family_id}")
 def delete_family(family_id: int):
     """
@@ -94,4 +100,3 @@ def delete_family(family_id: int):
         return delete_family_service(family_id)
     except DoesNotExist as exc:
         raise HTTPException(status_code=404, detail="Family not found") from exc
-    

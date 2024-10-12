@@ -1,4 +1,5 @@
 """This module implements the FastAPI router for the reservation endpoints."""
+
 import os
 from dotenv import load_dotenv
 from fastapi import HTTPException, Security, status

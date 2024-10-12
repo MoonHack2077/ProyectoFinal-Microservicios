@@ -4,6 +4,7 @@ This module contains the Pydantic model for category ingredient data.
 
 from pydantic import BaseModel
 
+
 class CategoryIngredient(BaseModel):
     """
     Category Ingredient model class.
@@ -12,6 +13,7 @@ class CategoryIngredient(BaseModel):
         nameCategoryIngredient (str): The name of the category ingredient.
         descriptionCategoryIngredient (str): The description of the category ingredient.
     """
-    idCategoryIngredient : int
-    nameCategoryIngredient : str
-    descriptionCategoryIngredient : str
+
+    idCategoryIngredient: int
+    nameCategoryIngredient: str
+    descriptionCategoryIngredient: str

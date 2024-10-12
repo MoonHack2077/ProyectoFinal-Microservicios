@@ -1,6 +1,7 @@
 """
 This module contains the routes for managing pantry data.
 """
+
 from fastapi import APIRouter, Body, HTTPException
 from peewee import DoesNotExist
 from app.models.pantry_model import Pantry
@@ -9,10 +10,11 @@ from app.services.pantry_service import (
     get_all_pantries_service,
     get_pantry_service,
     # update_pantry_service,
-    delete_pantry_service
+    delete_pantry_service,
 )
 
 pantry_router = APIRouter()
+
 
 @pantry_router.post("/")
 def create_pantry(pantry: Pantry = Body(...)):
@@ -21,11 +23,12 @@ def create_pantry(pantry: Pantry = Body(...)):
 
     Parameters:
         pantry (Pantry): An object containing the pantry details.
-        
+
     Returns:
         The created pantry object.
     """
     return create_pantry_service(pantry)
+
 
 @pantry_router.get("/{pantry_id}")
 def read_pantry(pantry_id: int):
@@ -46,6 +49,7 @@ def read_pantry(pantry_id: int):
     except DoesNotExist as exc:
         raise HTTPException(status_code=404, detail="Pantry not found") from exc
 
+
 @pantry_router.get("/")
 def read_pantries():
     """
@@ -55,6 +59,7 @@ def read_pantries():
         List[Pantry]: A list of all pantries.
     """
     return get_all_pantries_service()
+
 
 # @pantry_router.put("/{pantry_id}")
 # def update_pantry(pantry_id: int, pantry_data: Pantry = Body(...)):
@@ -75,6 +80,7 @@ def read_pantries():
 #         return update_pantry_service(pantry_id, pantry_data)
 #     except DoesNotExist as exc:
 #         raise HTTPException(status_code=404, detail="Pantry not found") from exc
+
 
 @pantry_router.delete("/{pantry_id}")
 def delete_pantry(pantry_id: int):

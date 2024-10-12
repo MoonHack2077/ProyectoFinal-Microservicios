@@ -1,8 +1,10 @@
 """
 This module contains the Pydantic model for ingredient inventory data.
 """
+
 from datetime import date
 from pydantic import BaseModel
+
 
 class IngredientInventory(BaseModel):
     """
@@ -14,9 +16,9 @@ class IngredientInventory(BaseModel):
         unit (str): The unit of the ingredient inventory.
         dateExpiration (date): The date of expiration of the ingredient inventory.
     """
-    idIngredientInventory : int
-    name : str
-    amount : float
-    unit : str
-    dateExpiration : date
-    
+
+    idIngredientInventory: int
+    name: str
+    amount: float
+    unit: str
+    dateExpiration: date

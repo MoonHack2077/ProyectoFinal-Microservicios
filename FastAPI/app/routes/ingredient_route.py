@@ -10,10 +10,11 @@ from app.services.ingredient_service import (
     get_all_ingredients_service,
     get_ingredient_service,
     update_ingredient_service,
-    delete_ingredient_service
+    delete_ingredient_service,
 )
 
 ingredient_router = APIRouter()
+
 
 @ingredient_router.post("/")
 def create_ingredient(ingredient: Ingredient = Body(...)):
@@ -22,11 +23,12 @@ def create_ingredient(ingredient: Ingredient = Body(...)):
 
     Parameters:
         ingredient (Ingredient): An object containing the ingredient details.
-        
+
     Returns:
         The created ingredient object.
     """
     return create_ingredient_service(ingredient)
+
 
 @ingredient_router.get("/{ingredient_id}")
 def read_ingredient(ingredient_id: int):
@@ -47,6 +49,7 @@ def read_ingredient(ingredient_id: int):
     except DoesNotExist as exc:
         raise HTTPException(status_code=404, detail="Ingredient not found") from exc
 
+
 @ingredient_router.get("/")
 def read_ingredients():
     """
@@ -56,6 +59,7 @@ def read_ingredients():
         List[Ingredient]: A list of all ingredients.
     """
     return get_all_ingredients_service()
+
 
 @ingredient_router.put("/{ingredient_id}")
 def update_ingredient(ingredient_id: int, ingredient_data: Ingredient = Body(...)):
@@ -76,6 +80,7 @@ def update_ingredient(ingredient_id: int, ingredient_data: Ingredient = Body(...
         return update_ingredient_service(ingredient_id, ingredient_data)
     except DoesNotExist as exc:
         raise HTTPException(status_code=404, detail="Ingredient not found") from exc
+
 
 @ingredient_router.delete("/{ingredient_id}")
 def delete_ingredient(ingredient_id: int):

@@ -10,10 +10,11 @@ from app.services.role_service import (
     get_all_roles_service,
     get_role_service,
     update_role_service,
-    delete_role_service
+    delete_role_service,
 )
 
 role_router = APIRouter()
+
 
 @role_router.post("/")
 def create_role(role: Role = Body(...)):
@@ -22,11 +23,12 @@ def create_role(role: Role = Body(...)):
 
     Parameters:
         role (Role): An object containing the role details.
-        
+
     Returns:
         The created role object.
     """
     return create_role_service(role)
+
 
 @role_router.get("/{role_id}")
 def read_role(role_id: int):
@@ -47,6 +49,7 @@ def read_role(role_id: int):
     except DoesNotExist as exc:
         raise HTTPException(status_code=404, detail="Role not found") from exc
 
+
 @role_router.get("/")
 def read_roles():
     """
@@ -56,6 +59,7 @@ def read_roles():
         List[Role]: A list of all roles.
     """
     return get_all_roles_service()
+
 
 @role_router.put("/{role_id}")
 def update_role(role_id: int, role_data: Role = Body(...)):
@@ -77,6 +81,7 @@ def update_role(role_id: int, role_data: Role = Body(...)):
     except DoesNotExist as exc:
         raise HTTPException(status_code=404, detail="Role not found") from exc
 
+
 @role_router.delete("/{role_id}")
 def delete_role(role_id: int):
     """
@@ -95,5 +100,3 @@ def delete_role(role_id: int):
         return delete_role_service(role_id)
     except DoesNotExist as exc:
         raise HTTPException(status_code=404, detail="Role not found") from exc
-
-    

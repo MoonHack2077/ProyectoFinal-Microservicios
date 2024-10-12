@@ -1,5 +1,7 @@
 """This module contains the service functions for the recipe model."""
+
 from app.models.recipe_model import Recipe
+
 
 def create_recipe_service(recipe):
     """
@@ -7,7 +9,7 @@ def create_recipe_service(recipe):
 
     Args:
         recipe (Recipe): An object containing the recipe details.
-        
+
     Returns:
         RecipeModel: The created recipe record.
     """
@@ -19,9 +21,10 @@ def create_recipe_service(recipe):
         difficultyRecipe=recipe.difficulty,
         timePreparation=recipe.timePreparation,
         instructions=recipe.instructions,
-        nutritionalData=recipe.nutritionalData
+        nutritionalData=recipe.nutritionalData,
     )
     return recipe_record
+
 
 def get_recipe_service(recipe_id: int):
     """
@@ -32,12 +35,12 @@ def get_recipe_service(recipe_id: int):
 
     Returns:
         DICT: A dictionary containing the recipe's details.
-        
+
     Raises:
         DoesNotExist: If the recipe with the given ID does not exist.
     """
     recipe = Recipe.get_by_id(recipe_id)
-    return{
+    return {
         "id": recipe.idRecipe,
         "name": recipe.nameRecipe,
         "description": recipe.descriptionRecipe,
@@ -45,9 +48,10 @@ def get_recipe_service(recipe_id: int):
         "difficulty": recipe.difficulty,
         "timePreparation": recipe.timePreparation,
         "instructions": recipe.instructions,
-        "nutritionalData": recipe.nutritionalData
+        "nutritionalData": recipe.nutritionalData,
     }
-    
+
+
 def get_all_recipes_service():
     """
     Retrieves all recipes from the database.
@@ -58,17 +62,18 @@ def get_all_recipes_service():
     recipes = list(Recipe.select())
     return [
         {
-        "id": recipe.idRecipe,
-        "name": recipe.nameRecipe,
-        "description": recipe.descriptionRecipe,
-        "category": recipe.category,
-        "difficulty": recipe.difficulty,
-        "timePreparation": recipe.timePreparation,
-        "instructions": recipe.instructions,
-        "nutritionalData": recipe.nutritionalData
+            "id": recipe.idRecipe,
+            "name": recipe.nameRecipe,
+            "description": recipe.descriptionRecipe,
+            "category": recipe.category,
+            "difficulty": recipe.difficulty,
+            "timePreparation": recipe.timePreparation,
+            "instructions": recipe.instructions,
+            "nutritionalData": recipe.nutritionalData,
         }
         for recipe in recipes
     ]
+
 
 def update_recipe_service(recipe_id: int, recipe_data: Recipe):
     """
@@ -77,10 +82,10 @@ def update_recipe_service(recipe_id: int, recipe_data: Recipe):
     Args:
         recipe_id (int): The ID of the recipe to update.
         recipe_data (Recipe): An object containing the updated user details.
-        
+
     Returns:
         RecipeModel: The updated recipe record.
-        
+
     Raises:
         DoesNotExist: If the recipe with the given ID does not exist.
     """
@@ -95,20 +100,20 @@ def update_recipe_service(recipe_id: int, recipe_data: Recipe):
     recipe.save()
     return recipe
 
+
 def delete_recipe_service(recipe_id: int):
     """
     Deletes a recipe from the database by their ID.
 
     Args:
         recipe_id (int): The ID of the recipe to delete.
-        
+
     Returns:
         dict: A message confirming the deletion.
-        
+
     Raises:
         DoesNotExist: If the recipe with the given ID does not exist.
     """
     recipe = Recipe.get_by_id(recipe_id)
     recipe.delete_instance()
     return {"message": "Recipe deleted successfully"}
-    

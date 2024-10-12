@@ -46,7 +46,7 @@ def read_user(user_id: int):
         return get_user_service(user_id)
     except DoesNotExist as exc:
         raise HTTPException(status_code=404, detail="User not found") from exc
-    
+
 @user_router.get("/")
 def read_users():
     """
@@ -76,7 +76,7 @@ def update_user(user_id: int, user_data: User = Body(...)):
         return update_user_service(user_id, user_data)
     except DoesNotExist as exc:
         raise HTTPException(status_code=404, detail="User not found") from exc
-    
+
 @user_router.delete("/{user_id}")
 def delete_user(user_id: int):
     """
@@ -95,5 +95,4 @@ def delete_user(user_id: int):
         return delete_user_service(user_id)
     except DoesNotExist as exc:
         raise HTTPException(status_code=404, detail="User not found") from exc
-
 

@@ -1,3 +1,4 @@
+# pylint: skip-file
 """Initial migration
 
 Revision ID: fe0a6c8333bc

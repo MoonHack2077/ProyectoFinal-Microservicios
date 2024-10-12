@@ -1,6 +1,6 @@
 """This module implements the FastAPI router for the reservation endpoints."""
-from dotenv import load_dotenv
 import os
+from dotenv import load_dotenv
 from fastapi import HTTPException, Security, status
 from fastapi.security.api_key import APIKeyHeader
 

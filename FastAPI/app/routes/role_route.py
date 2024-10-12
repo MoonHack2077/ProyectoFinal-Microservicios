@@ -95,5 +95,5 @@ def delete_role(role_id: int):
         return delete_role_service(role_id)
     except DoesNotExist as exc:
         raise HTTPException(status_code=404, detail="Role not found") from exc
-    
+
     

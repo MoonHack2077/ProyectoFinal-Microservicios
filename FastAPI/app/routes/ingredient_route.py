@@ -46,7 +46,7 @@ def read_ingredient(ingredient_id: int):
         return get_ingredient_service(ingredient_id)
     except DoesNotExist as exc:
         raise HTTPException(status_code=404, detail="Ingredient not found") from exc
-    
+
 @ingredient_router.get("/")
 def read_ingredients():
     """
@@ -76,7 +76,7 @@ def update_ingredient(ingredient_id: int, ingredient_data: Ingredient = Body(...
         return update_ingredient_service(ingredient_id, ingredient_data)
     except DoesNotExist as exc:
         raise HTTPException(status_code=404, detail="Ingredient not found") from exc
-    
+
 @ingredient_router.delete("/{ingredient_id}")
 def delete_ingredient(ingredient_id: int):
     """

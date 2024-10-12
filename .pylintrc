@@ -59,6 +59,7 @@ ignore-paths=
 # Emacs file locks
 ignore-patterns=^\.#
 
+ignore=FastAPI/app/alembic
 # List of module names for which member attributes should not be checked and
 # will not be imported (useful for modules/projects where namespaces are
 # manipulated during runtime and thus existing member attributes cannot be
@@ -408,6 +409,7 @@ logging-modules=logging
 
 [MESSAGES CONTROL]
 
+disable=no-member
 # Only show warnings with the listed confidence levels. Leave empty to show
 # all. Valid levels: HIGH, CONTROL_FLOW, INFERENCE, INFERENCE_FAILURE,
 # UNDEFINED.

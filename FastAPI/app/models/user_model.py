@@ -17,7 +17,12 @@ class User(BaseModel):
     """
 
     idUser: str
-    name: str
-    password: str
-    email: str
-    photo: str
+    nameUser: str
+    passwordUser: str
+    emailUser: str
+    photoUser: str
+    rolId: int
+    familyId: int
+    
+    class Config:
+        orm_mode = True

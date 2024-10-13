@@ -15,3 +15,6 @@ class Family(BaseModel):
 
     idFamily: int
     nameFamily: str
+    
+    class Config:
+        orm_mode = True

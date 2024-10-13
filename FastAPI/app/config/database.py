@@ -79,8 +79,8 @@ class User(Model):
     passwordUser = CharField(max_length=255)
     emailUser = CharField(max_length=255)
     photoUser = CharField(max_length=255)
-    rolId = ForeignKeyField(Role, backref="users")
-    familyId = ForeignKeyField(Family, backref="users")
+    rolId_id = ForeignKeyField(Role, backref="users", field='idRole')
+    familyId_id = ForeignKeyField(Family, backref="users")
 
     class Meta:
         """Defines the metadata for the User model."""

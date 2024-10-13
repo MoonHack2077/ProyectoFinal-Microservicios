@@ -1,9 +1,12 @@
 """This module contains the service functions for the user class."""
 
 from app.models.user_model import User
+from app.config.database import User as UserModel
+from app.services.role_service import get_all_roles_service
+from app.services.family_service import get_all_families_service
 
 
-def create_user_service(user):
+def create_user_service(user: User):
     """
     Creates a new user in the database.
 
@@ -13,13 +16,26 @@ def create_user_service(user):
     Returns:
         UserModel: The created user record.
     """
-    user_record = User.create(
+    
+    # Obtener todos los roles disponibles
+    available_roles = [role['idRole'] for role in get_all_roles_service()]
+    avaliable_families = [family['idFamily'] for family in get_all_families_service()]
+    
+    # Validar el rol
+    #if user.rolId not in available_roles:
+     #   raise HTTPException(status_code=400, detail="Invalid role specified")
+    
+    # Crear el usuario
+    user_record = UserModel.create(
         idUser=user.idUser,
-        name=user.name,
-        password=user.password,
-        email=user.email,
-        photo=user.photo,
+        nameUser=user.nameUser,
+        passwordUser=user.passwordUser,
+        emailUser=user.emailUser,
+        photoUser=user.photoUser,
+        rolId_id =user.rolId,
+        familyId_id = user.familyId
     )
+    
     return user_record
 
 
@@ -36,13 +52,15 @@ def get_user_service(user_id: int):
     Raises:
         DoesNotExist: If the user with the given ID does not exist.
     """
-    user = User.get_by_id(user_id)
+    user = UserModel.get_by_id(user_id)
     return {
-        "id": user.idUser,
-        "name": user.name,
-        "password": user.password,
-        "email": user.email,
-        "photo": user.photo,
+        "idUser": user.idUser,
+        "nameUser": user.nameUser,
+        "passwordUser": user.passwordUser,
+        "emailUser": user.emailUser,
+        "photoUser": user.photoUser,
+        "role": user.rolId_id,
+        "family": user.familyId_id
     }
 
 
@@ -53,14 +71,16 @@ def get_all_users_service():
     Returns:
         List: A list of dictionaries containing the data of each user's details.
     """
-    users = list(User.select())
+    users = list(UserModel.select())
     return [
         {
-            "id": user.idUser,
-            "name": user.name,
-            "password": user.password,
-            "email": user.email,
-            "photo": user.photo,
+            "idUser": user.idUser,
+            "nameUser": user.nameUser,
+            "passwordUser": user.passwordUser,
+            "emailUser": user.emailUser,
+            "photoUser": user.photoUser,
+            "role": user.rolId_id,
+            "family": user.familyId_id
         }
         for user in users
     ]
@@ -80,11 +100,13 @@ def update_user_service(user_id: int, user_data: User):
     Raises:
         DoesNotExist: If the user with the given ID does not exist.
     """
-    user = User.get_by_id(user_id)
-    user.name = user_data.name
-    user.password = user_data.password
-    user.email = user_data.email
-    user.photo = user_data.photo
+    user = UserModel.get_by_id(user_id)
+    user.nameUser = user_data.nameUser
+    user.passwordUser = user_data.passwordUser
+    user.emailUser = user_data.emailUser
+    user.photoUser = user_data.photoUser
+    user.idRole_id = user_data.rolId
+    user.familyId_id = user_data.familyId
     user.save()
     return user
 
@@ -102,6 +124,6 @@ def delete_user_service(user_id: int):
     Raises:
         DoesNotExist: If the user with the given ID does not exist.
     """
-    user = User.get_by_id(user_id)
+    user = UserModel.get_by_id(user_id)
     user.delete_instance()
     return {"message": "User deleted successfully"}

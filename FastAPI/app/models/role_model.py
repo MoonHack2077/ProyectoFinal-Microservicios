@@ -17,3 +17,6 @@ class Role(BaseModel):
     idRole: int
     nameRole: str
     permissions: str
+    
+    class Config:
+        orm_mode = True

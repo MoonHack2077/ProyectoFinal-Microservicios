@@ -1,9 +1,10 @@
 """This module contains the service functions for the family class."""
 
 from app.models.family_model import Family
+from app.config.database import Family as FamilyModel
 
 
-def create_family_service(family):
+def create_family_service(family: Family):
     """
     Creates a new family in the database.
 
@@ -13,7 +14,7 @@ def create_family_service(family):
     Returns:
         FamilyModel: The created family record.
     """
-    family_record = Family.create(
+    family_record = FamilyModel.create(
         idFamily=family.idFamily, nameFamily=family.nameFamily
     )
     return family_record
@@ -32,8 +33,8 @@ def get_family_service(family_id: int):
     Raises:
         DoesNotExist: If the family with the given ID does not exist.
     """
-    family = Family.get_by_id(family_id)
-    return {"id": family.idFamily, "name": family.nameFamily}
+    family = FamilyModel.get_by_id(family_id)
+    return {"idFamily": family.idFamily, "nameFamily": family.nameFamily}
 
 
 def get_all_families_service():
@@ -43,8 +44,8 @@ def get_all_families_service():
     Returns:
         List: A list of dictionaries containing the data of each family's details.
     """
-    families = list(Family.select())
-    return [{"id": family.idFamily, "name": family.nameFamily} for family in families]
+    families = list(FamilyModel.select())
+    return [{"idFamily": family.idFamily, "nameFamily": family.nameFamily} for family in families]
 
 
 def update_family_service(family_id: int, family_data: Family):
@@ -61,7 +62,7 @@ def update_family_service(family_id: int, family_data: Family):
     Raises:
         DoesNotExist: If the family with the given ID does not exist.
     """
-    family = Family.get_by_id(family_id)
+    family = FamilyModel.get_by_id(family_id)
     family.nameFamily = family_data.nameFamily
     family.save()
     return family
@@ -80,6 +81,6 @@ def delete_family_service(family_id: int):
     Raises:
         DoesNotExist: If the family with the given ID does not exist.
     """
-    family = Family.get_by_id(family_id)
+    family = FamilyModel.get_by_id(family_id)
     family.delete_instance()
     return {"message": "Family deleted successfully"}

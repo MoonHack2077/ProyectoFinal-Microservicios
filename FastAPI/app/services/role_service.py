@@ -1,9 +1,10 @@
 """This module contains the service functions for the role class."""
 
 from app.models.role_model import Role
+from app.config.database import Role as RoleModel
 
 
-def create_role_service(role):
+def create_role_service(role: Role):
     """
     Creates a new role in the database.
 
@@ -13,8 +14,8 @@ def create_role_service(role):
     Returns:
         RoleModel: The created role record.
     """
-    role_record = Role.create(
-        idRole=role.idRole, name=role.nameRole, permissions=role.permissions
+    role_record = RoleModel.create(
+        idRole=role.idRole, nameRole=role.nameRole, permissions=role.permissions
     )
     return role_record
 
@@ -32,8 +33,8 @@ def get_role_service(role_id: int):
     Raises:
         DoesNotExist: If the role with the given ID does not exist.
     """
-    role = Role.get_by_id(role_id)
-    return {"id": role.idRole, "name": role.nameRole, "permissions": role.permissions}
+    role = RoleModel.get_by_id(role_id)
+    return {"idRole": role.idRole, "nameRole": role.nameRole, "permissions": role.permissions}
 
 
 def get_all_roles_service():
@@ -43,9 +44,9 @@ def get_all_roles_service():
     Returns:
         List: A list of dictionaries containing the data of each role's details.
     """
-    roles = list(Role.select())
+    roles = list(RoleModel.select())
     return [
-        {"id": role.idRole, "name": role.nameRole, "permissions": role.permissions}
+        {"idRole": role.idRole, "nameRole": role.nameRole, "permissions": role.permissions}
         for role in roles
     ]
 
@@ -64,7 +65,7 @@ def update_role_service(role_id: int, role_data: Role):
     Raises:
         DoesNotExist: If the role with the given ID does not exist.
     """
-    role = Role.get_by_id(role_id)
+    role = RoleModel.get_by_id(role_id)
     role.nameRole = role_data.nameRole
     role.permissions = role_data.permissions
     role.save()
@@ -84,6 +85,6 @@ def delete_role_service(role_id: int):
     Raises:
         DoesNotExist: If the role with the given ID does not exist.
     """
-    role = Role.get_by_id(role_id)
+    role = RoleModel.get_by_id(role_id)
     role.delete_instance()
     return {"message": "Role deleted successfully"}

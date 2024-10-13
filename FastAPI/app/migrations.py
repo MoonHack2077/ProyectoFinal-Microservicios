@@ -49,8 +49,8 @@ class User(Base):
     passwordUser = Column(String(255), nullable=False)
     emailUser = Column(String(255), nullable=False)
     photoUser = Column(String(255), nullable=False)
-    rolId = Column(Integer, ForeignKey('roles.idRole'))
-    familyId = Column(Integer, ForeignKey('families.idFamily'))
+    rolId_id = Column(Integer, ForeignKey('roles.idRole'))
+    familyId_id = Column(Integer, ForeignKey('families.idFamily'))
 
 class Notification(Base):
     """

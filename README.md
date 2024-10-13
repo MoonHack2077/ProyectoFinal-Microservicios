@@ -23,7 +23,7 @@ Contains the environment variables needed to connect to the database and other s
    docker compose up --build
 
 4. **Run Pylint for code analysis:**
-    -If you haven't installed yet. Create a virtual environment and run:
+    If you haven't installed yet. Create a virtual environment and run:
     pip install pylint
 
     - Then, to analyze the code:
@@ -33,7 +33,7 @@ Contains the environment variables needed to connect to the database and other s
     docker compose down
 
 6. **Apply migration changes to db tables:**
-   -After having the containers up and running, we create a virtual environment by
+   After having the containers up and running, we create a virtual environment by
    installing the dependencies from the `requirements.txt` file.
    We execute the following command inside the /app
-   -alembic upgrade head
+   - alembic upgrade head

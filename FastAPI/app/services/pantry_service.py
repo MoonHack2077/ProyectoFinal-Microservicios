@@ -1,9 +1,10 @@
 """This module contains the service functions for the pantry class."""
 
 from app.models.pantry_model import Pantry
+from app.config.database import Pantry as PantryModel
 
 
-def create_pantry_service(pantry):
+def create_pantry_service(pantry: Pantry):
     """
     Creates a new pantry in the database.
 
@@ -13,7 +14,10 @@ def create_pantry_service(pantry):
     Returns:
         PantryModel: The created pantry record.
     """
-    pantry_record = Pantry.create(idPantry=pantry.idPantry)
+    pantry_record = PantryModel.create(
+        idPantry=pantry.idPantry,
+        user_id=pantry.user_id
+        )
     return pantry_record
 
 
@@ -30,8 +34,9 @@ def get_pantry_service(pantry_id: int):
     Raises:
         DoesNotExist: If the pantry with the given ID does not exist.
     """
-    pantry = Pantry.get_by_id(pantry_id)
-    return {"id": pantry.idPantry}
+    pantry = PantryModel.get_by_id(pantry_id)
+    return {"id": pantry.idPantry,
+            "user_id": pantry.user_id}
 
 
 def get_all_pantries_service():
@@ -41,27 +46,29 @@ def get_all_pantries_service():
     Returns:
         List: A list of dictionaries containing the data of each pantry's details.
     """
-    pantries = list(Pantry.select())
-    return [{"id": pantry.idPantry} for pantry in pantries]
+    pantries = list(PantryModel.select())
+    return [{"id": pantry.idPantry,
+             "user_id": pantry.user_id} for pantry in pantries]
 
 
-#  def update_pantry_service(pantry_id: int, pantry_data: Pantry):
-#     """
-#     Updates an existing pantry's details by its ID.
+def update_pantry_service(pantry_id: int, pantry_data: Pantry):
+    """
+    Updates an existing pantry's details by its ID.
 
-#     Args:
-#         pantry_id (int): The ID of the pantry to update.
-#         pantry_data (Pantry): An object containing the updated pantry details.
+    Args:
+        pantry_id (int): The ID of the pantry to update.
+        pantry_data (Pantry): An object containing the updated pantry details.
 
-#     Returns:
-#         PantryModel: The updated pantry record.
+    Returns:
+        PantryModel: The updated pantry record.
 
-#     Raises:
-#         DoesNotExist: If the pantry with the given ID does not exist.
-#     """
-#     pantry = Pantry.get_by_id(pantry_id)
-#     pantry.save()
-#     return pantry
+    Raises:
+        DoesNotExist: If the pantry with the given ID does not exist.
+    """
+    pantry = PantryModel.get_by_id(pantry_id)
+    pantry.user_id = pantry_data.user_id
+    pantry.save()
+    return pantry
 
 
 def delete_pantry_service(pantry_id: int):
@@ -77,6 +84,6 @@ def delete_pantry_service(pantry_id: int):
     Raises:
         DoesNotExist: If the pantry with the given ID does not exist.
     """
-    pantry = Pantry.get_by_id(pantry_id)
+    pantry = PantryModel.get_by_id(pantry_id)
     pantry.delete_instance()
     return {"message": "Pantry deleted successfully"}

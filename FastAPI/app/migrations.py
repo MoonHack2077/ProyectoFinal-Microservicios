@@ -72,11 +72,11 @@ class Pantry(Base):
     Pantry class represents a pantry in the application.
     Attributes:
         idPantry (int): The unique identifier of the pantry.
-        userId (int): The ID of the user associated with the pantry.
+        user_id (int): The ID of the user associated with the pantry.
     """
     __tablename__ = "pantries"
     idPantry = Column(Integer, primary_key=True, index=True)
-    userId = Column(Integer, ForeignKey('users.idUser'))
+    user_id = Column(Integer, ForeignKey('users.idUser'))
 
 class IngredientInventory(Base):
     """
@@ -87,7 +87,7 @@ class IngredientInventory(Base):
         amountIngredient (str): The amount of the ingredient.
         unitIngredient (str): The unit of measurement for the ingredient.
         dateExpirationIngredient (datetime.date): The expiration date of the ingredient.
-        pantryId (int): The ID of the pantry associated with the ingredient.
+        pantry_id (int): The ID of the pantry associated with the ingredient.
     """
     __tablename__ = "ingredient_pantries"
     ingredientId = Column(Integer, primary_key=True, index=True)
@@ -95,7 +95,7 @@ class IngredientInventory(Base):
     amountIngredient = Column(String(255), nullable=False)
     unitIngredient = Column(String(255), nullable=False)
     dateExpirationIngredient = Column(Date, nullable=False)
-    pantryId = Column(Integer, ForeignKey('pantries.idPantry'))
+    pantry_id = Column(Integer, ForeignKey('pantries.idPantry'))
 
 class CategoryRecipe(Base):
     """

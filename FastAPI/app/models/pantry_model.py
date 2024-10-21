@@ -13,3 +13,7 @@ class Pantry(BaseModel):
     """
 
     idPantry: int
+    user_id : int
+    
+    class Config:
+        orm_mode = True

@@ -17,8 +17,12 @@ class IngredientInventory(BaseModel):
         dateExpiration (date): The date of expiration of the ingredient inventory.
     """
 
-    idIngredientInventory: int
-    name: str
-    amount: float
-    unit: str
-    dateExpiration: date
+    ingredientId: int
+    nameIngredient: str
+    amountIngredient: float
+    unitIngredient: str
+    dateExpirationIngredient: date
+    pantry_id: int
+    
+    class Config:
+        orm_mode = True

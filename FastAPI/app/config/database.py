@@ -118,11 +118,11 @@ class Pantry(Model):
 
     Attributes:
         idPantry (int): The unique identifier of the user.
-        userId (int): The unique identifier of the user of the pantry.
+        user_id (int): The unique identifier of the user of the pantry.
     """
 
     idPantry = AutoField(primary_key=True)
-    userId = ForeignKeyField(User, backref="pantries")
+    user_id = ForeignKeyField(User, backref="pantries")
 
     class Meta:
         """Defines the metadata for the Pantry model."""
@@ -141,7 +141,7 @@ class IngredientInventory(Model):
         amountIngredient (str): The amount of the ingredient.
         unitIngredient (str): The unit of the ingredient.
         dateExpirationIngredient (date): The date expiration of the ingredient.
-        pantryId (int): The unique identifier of the pantry.
+        pantry_id (int): The unique identifier of the pantry.
     """
 
     ingredientId = AutoField(primary_key=True)
@@ -149,7 +149,7 @@ class IngredientInventory(Model):
     amountIngredient = CharField(max_length=255)
     unitIngredient = CharField(max_length=255)
     dateExpirationIngredient = DateField()
-    pantryId = ForeignKeyField(Pantry, backref="ingredient_pantries")
+    pantry_id = ForeignKeyField(Pantry, backref="ingredient_pantries")
 
     class Meta:
         """Defines the metadata for the IngredientPantry model."""

@@ -1,9 +1,10 @@
 """This module contains the service functions for the categoryIngredient class."""
 
 from app.models.category_ingredient_model import CategoryIngredient
+from app.config.database import CategoryIngredient as CategoryIngredientModel
 
 
-def create_category_ingredient_service(category_ingredient):
+def create_category_ingredient_service(category_ingredient: CategoryIngredient):
     """
     Creates a new categoryIngredient in the database.
 
@@ -14,10 +15,10 @@ def create_category_ingredient_service(category_ingredient):
     Returns:
         CategoryIngredientModel: The created categoryIngredient record.
     """
-    category_ingredient_record = CategoryIngredient.create(
+    category_ingredient_record = CategoryIngredientModel.create(
         idCategoryIngredient=category_ingredient.idCategoryIngredient,
         nameCategoryIngredient=category_ingredient.nameCategoryIngredient,
-        descriptionCategoryIngredient=category_ingredient.descriptionCategoryIngredient,
+        descriptionCategoryIngredient=category_ingredient.descriptionCategoryIngredient
     )
     return category_ingredient_record
 
@@ -35,11 +36,11 @@ def get_category_ingredient_service(category_ingredient_id: int):
     Raises:
         DoesNotExist: If the categoryIngredient with the given ID does not exist.
     """
-    category_ingredient = CategoryIngredient.get_by_id(category_ingredient_id)
+    category_ingredient = CategoryIngredientModel.get_by_id(category_ingredient_id)
     return {
-        "id": category_ingredient.idCategoryIngredient,
-        "name": category_ingredient.nameCategoryIngredient,
-        "description": category_ingredient.descriptionCategoryIngredient,
+        "idCategoryIngredient": category_ingredient.idCategoryIngredient,
+        "nameCategoryIngredient": category_ingredient.nameCategoryIngredient,
+        "descriptionCategoryIngredient": category_ingredient.descriptionCategoryIngredient
     }
 
 
@@ -50,12 +51,12 @@ def get_all_category_ingredients_service():
     Returns:
         List: A list of dictionaries containing the data of each categoryIngredient's details.
     """
-    category_ingredients = list(CategoryIngredient.select())
+    category_ingredients = list(CategoryIngredientModel.select())
     return [
         {
-            "id": category_ingredient.idCategoryIngredient,
-            "name": category_ingredient.nameCategoryIngredient,
-            "description": category_ingredient.descriptionCategoryIngredient,
+            "idCategoryIngredient": category_ingredient.idCategoryIngredient,
+            "nameCategoryIngredient": category_ingredient.nameCategoryIngredient,
+            "descriptionCategoryIngredient": category_ingredient.descriptionCategoryIngredient
         }
         for category_ingredient in category_ingredients
     ]
@@ -78,7 +79,7 @@ def update_category_ingredient_service(
     Raises:
         DoesNotExist: If the categoryIngredient with the given ID does not exist.
     """
-    category_ingre = CategoryIngredient.get_by_id(category_ingredient_id)
+    category_ingre = CategoryIngredientModel.get_by_id(category_ingredient_id)
     category_ingre.nameCategoryIngredient = category_data_i.nameCategoryIngredient
     category_ingre.descriptionCategoryIngredient = (
         category_data_i.descriptionCategoryIngredient
@@ -100,6 +101,6 @@ def delete_category_ingredient_service(category_ingredient_id: int):
     Raises:
         DoesNotExist: If the categoryIngredient with the given ID does not exist.
     """
-    category_ingredient = CategoryIngredient.get_by_id(category_ingredient_id)
+    category_ingredient = CategoryIngredientModel.get_by_id(category_ingredient_id)
     category_ingredient.delete_instance()
     return {"message": "CategoryIngredient deleted successfully"}

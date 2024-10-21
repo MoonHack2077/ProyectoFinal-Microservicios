@@ -22,3 +22,8 @@ class Ingredient(BaseModel):
     amountIngredient: float
     unitIngredient: str
     dateExpirationIngredient: date
+    recipe_id: int
+    categoryIngredient_id: int
+    
+    class Config:
+        orm_mode = True

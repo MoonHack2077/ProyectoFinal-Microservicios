@@ -1,9 +1,10 @@
 """This module contains the service functions for the categoryRecipe class."""
 
 from app.models.category_recipe_model import CategoryRecipe
+from app.config.database import CategoryRecipe as CategoryRecipeModel
 
 
-def create_category_recipe_service(category_recipe):
+def create_category_recipe_service(category_recipe: CategoryRecipe):
     """
     Creates a new categoryRecipe in the database.
 
@@ -13,11 +14,11 @@ def create_category_recipe_service(category_recipe):
     Returns:
         CategoryRecipeModel: The created categoryRecipe record.
     """
-    category_recipe_record = CategoryRecipe.create(
+    category_recipe_record = CategoryRecipeModel.create(
         idCategoryRecipe=category_recipe.idCategoryRecipe,
         nameCategoryRecipe=category_recipe.nameCategoryRecipe,
-        descriptionCategoryRecipe=category_recipe.descriptionCategoryRecipe,
-    )
+        descriptionCategoryRecipe=category_recipe.descriptionCategoryRecipe
+        )
     return category_recipe_record
 
 
@@ -34,11 +35,11 @@ def get_category_recipe_service(category_recipe_id: int):
     Raises:
         DoesNotExist: If the categoryRecipe with the given ID does not exist.
     """
-    category_recipe = CategoryRecipe.get_by_id(category_recipe_id)
+    category_recipe = CategoryRecipeModel.get_by_id(category_recipe_id)
     return {
-        "id": category_recipe.idCategoryRecipe,
-        "name": category_recipe.nameCategoryRecipe,
-        "description": category_recipe.descriptionCategoryRecipe,
+        "idCategoryRecipe": category_recipe.idCategoryRecipe,
+        "nameCategoryRecipe": category_recipe.nameCategoryRecipe,
+        "descriptionCategoryRecipe": category_recipe.descriptionCategoryRecipe
     }
 
 
@@ -49,12 +50,12 @@ def get_all_category_recipes_service():
     Returns:
         List: A list of dictionaries containing the data of each categoryRecipe's details.
     """
-    category_recipes = list(CategoryRecipe.select())
+    category_recipes = list(CategoryRecipeModel.select())
     return [
         {
-            "id": category_recipe.idCategoryRecipe,
-            "name": category_recipe.nameCategoryRecipe,
-            "description": category_recipe.descriptionCategoryRecipe,
+            "idCategoryRecipe": category_recipe.idCategoryRecipe,
+            "nameCategoryRecipe": category_recipe.nameCategoryRecipe,
+            "descriptionCategoryRecipe": category_recipe.descriptionCategoryRecipe,
         }
         for category_recipe in category_recipes
     ]
@@ -77,7 +78,7 @@ def update_category_recipe_service(
     Raises:
         DoesNotExist: If the categoryRecipe with the given ID does not exist.
     """
-    category_recipe = CategoryRecipe.get_by_id(category_recipe_id)
+    category_recipe = CategoryRecipeModel.get_by_id(category_recipe_id)
     category_recipe.nameCategoryRecipe = category_recipe_data.nameCategoryRecipe
     category_recipe.descriptionCategoryRecipe = (
         category_recipe_data.descriptionCategoryRecipe
@@ -99,6 +100,6 @@ def delete_category_recipe_service(category_recipe_id: int):
     Raises:
         DoesNotExist: If the categoryRecipe with the given ID does not exist.
     """
-    category_recipe = CategoryRecipe.get_by_id(category_recipe_id)
+    category_recipe = CategoryRecipeModel.get_by_id(category_recipe_id)
     category_recipe.delete_instance()
     return {"message": "CategoryRecipe deleted successfully"}

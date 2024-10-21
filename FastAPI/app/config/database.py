@@ -199,13 +199,12 @@ class Recipe(Model):
     idRecipe = AutoField(primary_key=True)
     nameRecipe = CharField(max_length=255)
     descriptionRecipe = CharField(max_length=255)
-    categoryRecipe = CharField(max_length=255)
     difficultyRecipe = CharField(max_length=255)
     timePreparation = TimeField()
     instructions = CharField(max_length=255)
     nutritionalData = CharField(max_length=255)
-    userId = ForeignKeyField(User, backref="recipes")
-    categoriaId = ForeignKeyField(CategoryRecipe, backref="recipes")
+    user_id = ForeignKeyField(User, backref="recipes")
+    categoria_id = ForeignKeyField(CategoryRecipe, backref="recipes")
 
     class Meta:
         """Defines the metadata for the Recipe model."""
@@ -332,8 +331,8 @@ class Ingredient(Model):
     amountIngredient = CharField(max_length=255)
     unitIngredient = CharField(max_length=255)
     dateExpirationIngredient = DateField()
-    recipeId = ForeignKeyField(Recipe, backref="ingredients")
-    categoryIdIngredient = ForeignKeyField(CategoryIngredient, backref="ingredients")
+    recipe_id = ForeignKeyField(Recipe, backref="ingredients")
+    categoryIngredient_id = ForeignKeyField(CategoryIngredient, backref="ingredients")
 
     class Meta:
         """Defines the metadata for the Ingredient model."""

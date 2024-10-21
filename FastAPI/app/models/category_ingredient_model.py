@@ -17,3 +17,6 @@ class CategoryIngredient(BaseModel):
     idCategoryIngredient: int
     nameCategoryIngredient: str
     descriptionCategoryIngredient: str
+    
+    class Config:
+        orm_mode = True

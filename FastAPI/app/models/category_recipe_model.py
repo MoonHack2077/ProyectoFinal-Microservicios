@@ -17,3 +17,6 @@ class CategoryRecipe(BaseModel):
     idCategoryRecipe: int
     nameCategoryRecipe: str
     descriptionCategoryRecipe: str
+    
+    class Config:
+        orm_mode = True

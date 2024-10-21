@@ -22,8 +22,12 @@ class Recipe(BaseModel):
     idRecipe: int
     nameRecipe: str
     descriptionRecipe: str
-    category: str
-    difficulty: str
+    difficultyRecipe: str
     timePreparation: int
     instructions: str
     nutritionalData: str
+    userId: int
+    categoriaId: int
+    
+    class Config:
+        orm_mode = True

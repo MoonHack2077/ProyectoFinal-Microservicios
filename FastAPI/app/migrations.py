@@ -133,8 +133,8 @@ class Recipe(Base):
     timePreparation = Column(Time, nullable=False)
     instructions = Column(String(255), nullable=False)
     nutritionalData = Column(String(255), nullable=False)
-    userId = Column(Integer, ForeignKey('users.idUser'))
-    categoriaId = Column(Integer, ForeignKey('categoryRecipes.idCategoryRecipe'))
+    user_id = Column(Integer, ForeignKey('users.idUser'))
+    categoria_id = Column(Integer, ForeignKey('categoryRecipes.idCategoryRecipe'))
 
 recipe_category_association = Table(
     "category_recipes",
@@ -205,8 +205,8 @@ class Ingredient(Base):
     amountIngredient = Column(String(255), nullable=False)
     unitIngredient = Column(String(255), nullable=False)
     dateExpirationIngredient = Column(Date, nullable=False)
-    recipeId = Column(Integer, ForeignKey('recipes.idRecipe'))
-    categoryIdIngredient = Column(Integer, ForeignKey('categoryIngredients.idCategoryIngredient'))
+    recipe_id = Column(Integer, ForeignKey('recipes.idRecipe'))
+    categoryIngredient_id = Column(Integer, ForeignKey('categoryIngredients.idCategoryIngredient'))
 
 shopping_list_ingredient_association = Table(
     "shopping_list_ingredients",

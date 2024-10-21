@@ -1,9 +1,10 @@
 """This module contains the service functions for the ingredient class."""
 
 from app.models.ingredient_model import Ingredient
+from app.config.database import Ingredient as IngredientModel
 
 
-def create_ingredient_service(ingredient):
+def create_ingredient_service(ingredient: Ingredient):
     """
     Creates a new ingredient in the database.
 
@@ -13,12 +14,14 @@ def create_ingredient_service(ingredient):
     Returns:
         IngredientModel: The created ingredient record.
     """
-    ingredient_record = Ingredient.create(
+    ingredient_record = IngredientModel.create(
         idIngredient=ingredient.idIngredient,
         nameIngredient=ingredient.nameIngredient,
         amountIngredient=ingredient.amountIngredient,
         unitIngredient=ingredient.unitIngredient,
         dateExpirationIngredient=ingredient.dateExpirationIngredient,
+        recipe_id=ingredient.recipe_id,
+        categoryIngredient_id=ingredient.categoryIngredient_id
     )
     return ingredient_record
 
@@ -36,13 +39,15 @@ def get_ingredient_service(ingredient_id: int):
     Raises:
         DoesNotExist: If the ingredient with the given ID does not exist.
     """
-    ingredient = Ingredient.get_by_id(ingredient_id)
+    ingredient = IngredientModel.get_by_id(ingredient_id)
     return {
-        "id": ingredient.idIngredient,
-        "name": ingredient.nameIngredient,
-        "amount": ingredient.amountIngredient,
-        "unit": ingredient.unitIngredient,
-        "date_expiration": ingredient.dateExpirationIngredient,
+        "idIngredient": ingredient.idIngredient,
+        "nameIngredient": ingredient.nameIngredient,
+        "amountIngredient": ingredient.amountIngredient,
+        "unitIngredient": ingredient.unitIngredient,
+        "dateExpirationIngredient": ingredient.dateExpirationIngredient,
+        "recipe_id": ingredient.recipe_id,
+        "categoryIngredient_id": ingredient.categoryIngredient_id
     }
 
 
@@ -53,14 +58,16 @@ def get_all_ingredients_service():
     Returns:
         List: A list of dictionaries containing the data of each ingredient's details.
     """
-    ingredients = list(Ingredient.select())
+    ingredients = list(IngredientModel.select())
     return [
         {
-            "id": ingredient.idIngredient,
-            "name": ingredient.nameIngredient,
-            "amount": ingredient.amountIngredient,
-            "unit": ingredient.unitIngredient,
-            "date_expiration": ingredient.dateExpirationIngredient,
+            "idIngredient": ingredient.idIngredient,
+            "nameIngredient": ingredient.nameIngredient,
+            "amountIngredient": ingredient.amountIngredient,
+            "unitIngredient": ingredient.unitIngredient,
+            "dateExpirationIngredient": ingredient.dateExpirationIngredient,
+            "recipe_id": ingredient.recipe_id,
+            "categoryIngredient_id": ingredient.categoryIngredient_id
         }
         for ingredient in ingredients
     ]
@@ -80,11 +87,13 @@ def update_ingredient_service(ingredient_id: int, ingredient_data: Ingredient):
     Raises:
         DoesNotExist: If the ingredient with the given ID does not exist.
     """
-    ingredient = Ingredient.get_by_id(ingredient_id)
+    ingredient = IngredientModel.get_by_id(ingredient_id)
     ingredient.nameIngredient = ingredient_data.nameIngredient
     ingredient.amountIngredient = ingredient_data.amountIngredient
     ingredient.unitIngredient = ingredient_data.unitIngredient
     ingredient.dateExpirationIngredient = ingredient_data.dateExpirationIngredient
+    ingredient.recipe_id = ingredient_data.recipe_id
+    ingredient.categoryIngredient_id = ingredient_data.categoryIngredient_id
     ingredient.save()
     return ingredient
 
